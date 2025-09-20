@@ -30,25 +30,20 @@ def index():
 
         session["name"] = name 
 
-        # UofT check
         if "utoronto" in email.lower():
-            session["email"] = email
-            form.name.data = ""
-            form.email.data = ""
-            return redirect(url_for("index"))
+            session["email"] = email          
+            return redirect(url_for("index"))  
         else:
-            # “Please use your UofT email.”
-            non_uoft = True
-            form.name.data = ""
-            form.email.data = ""
+            session.pop("email", None)      
             return render_template(
                 "index.html",
                 form=form,
                 name=session.get("name"),
-                email=session.get("email"),
-                non_uoft=non_uoft,
+                email=None,               
+                non_uoft=True,
             )
 
+    # GET or invalid form
     return render_template(
         "index.html",
         form=form,

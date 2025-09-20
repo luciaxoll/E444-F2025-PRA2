@@ -6,8 +6,15 @@
 {% block page_content %}
 <div class="page-header">
   <h1>Hello, {{ name or "Stranger" }}! Welcome to PRA2 Docker!</h1>
+
+  {# show UofT-email-only warning when needed #}
   {% if non_uoft %}
     <p class="lead"><strong>Please use your UofT email.</strong></p>
+  {% endif %}
+
+  {# NEW: show the validated email if we have one #}
+  {% if email %}
+    <p>Your UofT email is <strong>{{ email }}</strong>.</p>
   {% endif %}
 </div>
 
